@@ -1,0 +1,22 @@
+from PIL import Image
+
+def zoom_image(input_image_path, output_image_path, zoom_factor):
+    # Open the input image
+    with Image.open(input_image_path) as img:
+        # Calculate the new dimensions
+        new_width = int(img.width * zoom_factor)
+        new_height = int(img.height * zoom_factor)
+        
+        # Resize the image using bilinear interpolation for smoother results
+        img = img.resize((new_width, new_height), Image.BILINEAR)
+        
+        # Save the zoomed image
+        img.save(output_image_path)
+
+# Example usage
+input_image_path = "input.jpg"
+output_image_path = "zoomed_output.jpg"
+zoom_factor = 2.0  # Increase this value to zoom in further
+
+zoom_image(input_image_path, output_image_path, zoom_factor)
+print("Image zoomed successfully.")
